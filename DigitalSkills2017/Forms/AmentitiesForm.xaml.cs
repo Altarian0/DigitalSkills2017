@@ -2,6 +2,7 @@
 using DigitalSkills2017.Helper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,34 @@ namespace DigitalSkills2017.Forms
     {
         private Tickets _ticket = new Tickets();
         private decimal _sum = 0;
+        private List<Amenities> _amenities = new List<Amenities>(DataHelper.GetContext().Amenities.ToList());
         public AmentitiesForm()
         {
             InitializeComponent();
-            AmentitiesList.ItemsSource = DataHelper.GetContext().Amenities.ToList();
+            AmentitiesList.ItemsSource = _amenities;
+        }
+
+        private void CancelChanges()
+        {
+            foreach(var check in DataHelper.GetContext().Amenities.ToList())
+            {
+                check.Checked = false;
+            }
+
+            foreach (var entry in DataHelper.GetContext().ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified; 
+                        entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
+                }
+            }
         }
 
         private void SelectBookButton_Click(object sender, RoutedEventArgs e)
@@ -35,9 +60,20 @@ namespace DigitalSkills2017.Forms
             _ticket = DataHelper.GetContext().Tickets.Where(n => n.BookingReference == BookText.Text).FirstOrDefault();
             DataContext = _ticket;
 
+            List<AmenitiesTickets> amenitiesTickets = new List<AmenitiesTickets>();
             List<Amenities> amenities = new List<Amenities>();
-            List<AmenitiesTickets> amenitiesTickets = new List<AmenitiesTickets>(DataHelper.GetContext().AmenitiesTickets.Where(n => n.TicketID == _ticket.ID).ToList());
-            foreach (var amenitie in DataHelper.GetContext().Amenities.ToList())
+            try
+            {
+
+                amenitiesTickets = new List<AmenitiesTickets>(DataHelper.GetContext().AmenitiesTickets.Where(n => n.TicketID == _ticket.ID).ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Данного билета не существует!");
+                return;
+            }
+
+            foreach (var amenitie in _amenities)
             {
                 AmenitiesTickets amenitiesTicket = new AmenitiesTickets { AmenityID = amenitie.ID };
 
@@ -49,9 +85,8 @@ namespace DigitalSkills2017.Forms
             }
             AmentitiesList.ItemsSource = amenities;
 
-            _sum = amenitiesTickets.Select(n => n.Price).Sum();
-            ResTotalPayable.Text = $"Total payable: {_sum}";
-            ResItemsSelected.Text = $"Items selected: {amenities.Where(n=>n.Checked == true).Count()}";
+            
+            ResItemsSelected.Text = $"Items selected: {amenities.Where(n => n.Checked == true).Count()}";
         }
 
         private void SchedulesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,8 +101,8 @@ namespace DigitalSkills2017.Forms
             var ticket = _ticket;
 
             _sum += amentitie.Price;
-            ResTotalPayable.Text = $"Total payable: {_sum}";
-
+            ResTotalPayable.Text = $"Total payable: {Math.Round(_sum)}";
+            ResDutiesAndTaxes.Text = $"Duties and taxes: {double.Parse(_sum.ToString())*0.05}";
 
             AmenitiesTickets amenitiesTickets = new AmenitiesTickets
             {
@@ -83,12 +118,12 @@ namespace DigitalSkills2017.Forms
         {
             string amentitieName = ((CheckBox)sender).Content.ToString();
             var amentitie = DataHelper.GetContext().Amenities.Where(n => n.Service == amentitieName).Single();
-            var ticket = _ticket;
 
             _sum -= amentitie.Price;
-            ResTotalPayable.Text = $"Total payable: {_sum}";
+            ResTotalPayable.Text = $"Total payable: {Math.Round(_sum)}";
+            ResDutiesAndTaxes.Text = $"Duties and taxes: {double.Parse(_sum.ToString()) * 0.05}";
 
-            AmenitiesTickets amenitiesTickets = DataHelper.GetContext().AmenitiesTickets.Where(n => n.AmenityID == amentitie.ID && n.TicketID == ticket.ID && n.Price == amentitie.Price).FirstOrDefault();
+            AmenitiesTickets amenitiesTickets = DataHelper.GetContext().AmenitiesTickets.Where(n => n.AmenityID == amentitie.ID && n.TicketID == _ticket.ID && n.Price == amentitie.Price).FirstOrDefault();
 
             try
             {
@@ -109,6 +144,11 @@ namespace DigitalSkills2017.Forms
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CancelChanges();
         }
     }
 }

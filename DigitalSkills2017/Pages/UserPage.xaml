@@ -43,6 +43,7 @@
         <Label x:Name="WelcomeLabel" Content="Hi user, welcome to AMONIC Airlines" Margin="10,0,436,9.4" VerticalAlignment="Bottom"/>
         <Label x:Name="TimeSpentLabel" Content="Time spent on system:" Margin="369,0,180,10.4" VerticalAlignment="Bottom"/>
         <Label x:Name="CrashesNumberLabel" Content="Number of crashes:" Margin="643,0,10,9.4" VerticalAlignment="Bottom"/>
-        <Button x:Name="Amentities" Content="Amentities" Margin="0,25,10,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="95" Click="Amentities_Click"/>
+        <Button x:Name="Amentities" Content="Amentities" Margin="0,25,10,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="117" Click="Amentities_Click"/>
+        <Button x:Name="ReportAmentities" Content="Report Amentities" Margin="0,54,10,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="117" Click="ReportAmentities_Click"/>
     </Grid>
 </Page>

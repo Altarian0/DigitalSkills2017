@@ -76,5 +76,11 @@ namespace DigitalSkills2017.Pages
             AmentitiesForm amentitiesForm = new AmentitiesForm();
             amentitiesForm.ShowDialog();
         }
+
+        private void ReportAmentities_Click(object sender, RoutedEventArgs e)
+        {
+            ReportAmenitiesForm reportAmenitiesForm = new ReportAmenitiesForm();
+            reportAmenitiesForm.ShowDialog();
+        }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a8cb38cf69c4b589432ed37e29896f7" Name="Diagram1">
+        <EntityTypeShape EntityType="Session5Model1.Aircrafts" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Airports" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Amenities" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.AmenitiesTickets" Width="1.5" PointX="12" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.CabinTypes" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Countries" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Offices" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Roles" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Routes" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Schedules" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Tickets" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Tracking" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Session5Model1.Users" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="Session5Model1.FK_Schedule_AirCraft" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_AirPort_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Routes_Airports2" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Routes_Airports3" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_AmenitiesTickets_Amenities" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_AmenitiesTickets_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Ticket_TravelClass" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Office_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Users_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Schedule_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Ticket_Schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Ticket_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.FK_Tracking_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Session5Model1.AmenitiesCabinType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -17,10 +17,6 @@ namespace DigitalSkills2017.Database
         public int AmenityID { get; set; }
         public int TicketID { get; set; }
         public decimal Price { get; set; }
-    
-        public virtual Amenities Amenities { get; set; }
-        public virtual Tickets Tickets { get; set; }
-
         public object Clone()
         {
             return this;
@@ -35,5 +31,7 @@ namespace DigitalSkills2017.Database
         {
             return base.GetHashCode();
         }
+        public virtual Amenities Amenities { get; set; }
+        public virtual Tickets Tickets { get; set; }
     }
 }

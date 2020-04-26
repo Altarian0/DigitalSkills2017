@@ -21,7 +21,6 @@ namespace DigitalSkills2017.Database
         public Nullable<System.DateTime> LogoutTime { get; set; }
         public Nullable<bool> Crashe { get; set; }
         public string CrasheReason { get; set; }
-
         public string Date
         {
             get
@@ -68,6 +67,7 @@ namespace DigitalSkills2017.Database
                 return $"{timeSpan.Hours}:{timeSpan.Minutes}:{timeSpan.Seconds}";
             }
         }
+
         public virtual Users Users { get; set; }
     }
 }
